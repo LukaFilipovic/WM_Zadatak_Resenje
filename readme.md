@@ -8,7 +8,5 @@ npm install
 
 ### Build assets
 ```
-npm run serve
-```
 gulp build
 ```
