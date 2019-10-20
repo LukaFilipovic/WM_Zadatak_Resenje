@@ -1,5 +1,4 @@
-# MW_zadatak
-
+# WM_Zadatak_Resenje
 
 ## Project setup
 ```
@@ -14,4 +13,3 @@ npm install
 ```
 gulp build
 ```
-
