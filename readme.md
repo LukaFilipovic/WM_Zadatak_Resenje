@@ -8,5 +8,5 @@ npm install
 
 ### Build assets
 ```
-gulp build
+gulp
 ```
