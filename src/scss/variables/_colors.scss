@@ -1,0 +1,34 @@
+$black: #000000;
+$white: #FFFFFF;
+
+//#######################################
+//## PROJECT COLORS #####################
+//#######################################
+$main-color : #646464;
+$secondary-color: #757575;
+$active-color: #bbd547;
+
+$light-grey-100: #a1a3a6; 
+$light-grey-200: #dbdbdb;
+$light-grey-300: #bababa;
+
+$green: #bbd547;
+$dark-green: #81b36e;
+$blue: #429099;
+$dark-blue: #1375b8;
+
+$colors :(
+    'green': $green,
+    'dark-green': $dark-green,
+    'blue': $blue,
+    'dark-blue': $dark-blue,
+);
+//#######################################
+//## OVERRIDES ##########################
+//#######################################
+
+$default-body-text-color: $main-color;
+// $default-body-link-color: $main-darkblue;
+
+$default-selection-text-color: $green;
+// $default-selection-bg-color: $main-darkblue;

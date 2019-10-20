@@ -1,0 +1,57 @@
+.footer{
+    background-color: $light-grey-200;
+    padding: 11px 12px 9px 13px;
+    @include breakpoint_up($small){
+        padding: 11px 30px 9px 35px;
+    }
+    &__inner{
+        align-items: center;
+        display: flex;
+    }
+    &__block{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        &--social{
+            flex: 0 0 52%;
+            max-width: 52%;
+            justify-content: space-between;
+            @include breakpoint_up($small){
+                flex: 0 0 152px;
+                max-width: 152px;
+            }
+        }
+        &--menu{
+            display: none;
+            @include breakpoint_up($phab){
+                display: flex;
+                flex: 0 0 357px;
+                justify-content: space-between;
+                max-width: 357px;
+                padding-left: 66px;
+            }
+        }
+        &--to-top{
+            flex: 1 0 auto;
+            justify-content: flex-end;
+        }
+    }
+    &__icon-link{
+        display: inline-flex;
+        width: 39px;
+        padding-bottom: 39px;
+        position: relative;
+        &--icon-facebook{
+            @include set_icon('footer','facebook');
+        }
+        &--icon-twitter{
+            @include set_icon('footer','twitter');
+        }
+        &--icon-mail{
+            @include set_icon('footer','mail');
+        }
+        &--icon-to-top{
+            @include set_icon('footer','to-top');
+        }
+    }
+}

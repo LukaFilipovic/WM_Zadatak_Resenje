@@ -1,0 +1,104 @@
+@function str-replace( $string, $search, $replace: '' ) {
+
+    $index: str-index( $string, $search );
+  
+    @if $index {
+      @return str-slice( $string, 1, $index - 1 ) + $replace + str-replace( str-slice( $string, $index + str-length( $search ) ), $search, $replace);
+    }
+  
+    @return $string;
+  }
+
+// @function get-icon( $icon, $color: #fff ) {
+
+//     $icon:        map-get( $icons, $icon );
+//     $placeholder: '%%COLOR%%';
+
+//     $data-uri: str-replace( url( $data-svg-prefix + $icon ), $placeholder, $color );
+
+//     @return str-replace( $data-uri, '#', '%23' );
+// }
+
+@function get-icon( $component, $icon, $type) {
+    $url-prefix: '';
+    $ext: '.png';
+
+    @if $component == 'footer'{
+        @if $type == 'normal'{
+            $url-prefix: '../images/footer-icons/social-icon--';
+        }
+        @if $type == 'alt' {
+            $url-prefix: '../images/footer-icons/social-icon--alt--';
+        }
+        @return url(#{$url-prefix+$icon+$ext});
+    } @else if $component == 'header'{
+        @if $type == 'normal'{
+            $url-prefix: '../images/header-icons/header-icon--';
+        }
+        @if $type == 'alt' {
+            $url-prefix: '../images/header-icons/header-icon--alt--';
+        }
+        @return url(#{$url-prefix+$icon+$ext});
+    } @else if $component == 'section'{
+        @if $type == 'normal'{
+            $url-prefix: '../images/section-icons/section-icon--';
+        }
+        @if $type == 'alt' {
+            $url-prefix: '../images/section-icons/section-icon--alt--';
+        }
+        @return url(#{$url-prefix+$icon+$ext});
+    }
+
+}
+
+
+// @mixin set_icon($icon, $color, $alt-color: $color){
+//     &:after{
+//         background-image: get-icon($icon, $color);
+//         background-position: center;
+//         background-repeat: no-repeat;
+//         background-size: cover;
+//         content: '';
+//         position: absolute;
+//         width: 100%;
+//         height: 100%;
+//         left: 0;
+//         top: 0;
+//     }
+//     &:hover:after,
+//     &:focus:after,
+//     &:visited:after{
+//         background-image: get-icon($icon, $alt-color);
+//     }
+// }
+@mixin set_icon($component, $icon){
+    
+    &:after{
+        background-image: get-icon($component, $icon, 'normal');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+    }
+    &:hover:after,
+    &:focus:after,
+    &:visited:after,
+    &:active:after{
+        background-image: get-icon($component, $icon, 'alt');
+    }
+    &.header__icon-link--button{
+        &:visited:after,
+        &:focus:after,
+        &:active:after{
+            background-image: get-icon($component, $icon, 'normal') !important;
+        }
+        &.-active:after{
+            background-image: get-icon($component, $icon, 'alt') !important;
+        }
+    }
+}

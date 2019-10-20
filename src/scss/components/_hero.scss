@@ -1,0 +1,114 @@
+.hero{
+    border-bottom: 1px solid #d5d5d5;
+    &__slide{
+        position: relative;
+    }
+    &__image{
+        @include background(320,118);
+        @include breakpoint_up($small){
+            @include background(480,195)
+        }
+    }
+    &__slider-icon{
+        max-width: 99px;
+        @include breakpoint_up($small){
+            max-width: 134px;
+        }
+        @include breakpoint_up($phab){
+            max-width: 171px;
+        }
+        @include breakpoint_up($large){
+            max-width: 22vw;
+        }
+    }
+    &__icon-box{
+        align-items: center;
+        display: flex;
+        height: calc(100% - 67px);
+        justify-content: center;
+        left: 0;
+        top: 0;
+        position: absolute;
+        width: 100%;
+        @include breakpoint_up($small){
+            height: 100%;
+            justify-content: flex-end;
+            width: calc(180 / 480 * 100%);
+        }
+    }
+    &__text-box{
+        position: relative;
+        padding: 24px 0px 25px 29px;
+        @include breakpoint_up($small){
+            align-items: center;
+            display: flex;
+            height: 100%;
+            padding: 0px 14px 0px 18px;
+            position: absolute;
+            right: 0;
+            text-align: left;
+            top: 0;
+            width: calc(300 / 480 * 100%);
+
+        }
+    }
+    &__arrow-icon{
+        height: auto;
+        position: absolute;
+        top: 50%;
+        right: 6px;
+        transform: translateY(-70%);
+        width: auto;
+        &--left{
+            left: 6px;
+            right: auto;
+            right: unset;
+        }
+        @include breakpoint_up($small){
+            display: none !important;
+        }
+    }
+    &__title{
+        color: $secondary-color;
+        font-size: 16px;
+        font-weight: 400;
+        text-transform: uppercase;
+        margin: 0;
+        @include breakpoint_up($small){
+            font-size: 38px;
+        }
+        @include breakpoint_up($large){
+            font-size: 60px;
+        }
+    }
+    
+
+
+    // slick-carousel css overrides
+    .slick-dotted.slick-slider{
+        margin-bottom: 0px;
+    }
+    .slick-initialized .slick-slide{
+        margin-bottom: -4px;
+    }
+    .slick-dots{
+        bottom: 12px;
+    }
+    .slick-dots li{
+        width: 9px;
+        height: 9px;
+        margin: 0px 3px;
+    }
+    .slick-dots li button{
+        background-color: $light-grey-300;
+        border-radius: 50%;
+        width: 9px;
+        height: 9px;
+        &:before{
+           display: none;
+        }
+    }
+    .slick-dots li.slick-active button{
+        background-color: $green;
+    }
+}

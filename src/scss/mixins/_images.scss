@@ -1,0 +1,12 @@
+// set background image size based on width and height
+
+@mixin background($width, $height){
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    @if $width > $height{
+        padding-bottom: ($height/$width) * 100%;
+    } @else{
+        padding-bottom: ($width/$height) * 100%;
+    }
+}

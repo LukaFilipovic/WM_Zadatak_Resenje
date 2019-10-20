@@ -1,0 +1,18 @@
+.what-we-do{
+    margin-bottom: 19px;
+    @include breakpoint_up($small){
+        margin-bottom: 24px;
+    }
+    @include breakpoint_up($phab){
+        margin-bottom: 31px;
+    }
+    .block-holder__block{
+        margin-bottom: 0px;
+    }
+    .block-holder__inner{
+        margin-bottom: 25px;
+        @include breakpoint_up($small){
+            margin-bottom: 40px;
+        }
+    }
+}

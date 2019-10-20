@@ -1,0 +1,109 @@
+@charset "utf-8";
+
+//#######################################
+//## BASE ###############################
+//#######################################
+@import 'base/_normalize';
+@import 'base/_layout';
+
+//#######################################
+//## VARIABLES ##########################
+//#######################################
+@import 'variables/_colors';
+@import 'variables/_breakpoints';
+@import 'variables/_fonts';
+@import 'variables/_icons';
+@import 'variables/_grid-values';
+
+//#######################################
+//## MIXINS #############################
+//#######################################
+@import 'mixins/_breakpoints';
+@import 'mixins/_icons';
+@import 'mixins/_images';
+
+
+//#######################################
+//## COMPONENTS #########################
+//#######################################
+@import 'components/_block-holder';
+@import 'components/_section';
+@import 'components/_hero';
+@import 'components/_footer';
+@import 'components/_header';
+
+//#######################################
+//## SECTIONS ###########################
+//#######################################
+@import 'sections/_what-we-do';
+
+body,
+html{
+    min-height: 100vh;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.page-wrapper{
+    flex: 1 0 auto;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+.container{
+    margin: 0 auto;
+    padding-left: 23.1%;
+    padding-right: 20.6%;
+
+    @include breakpoint_up($small){
+        padding-right: 34px;
+        padding-left: 34px;
+        max-width: 485px;
+    }
+    // max-width: 53%;
+}
+
+.menu-link{
+    color: $light-grey-100;
+    font-size: 14px;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    transition: all 0.25s ease-in-out;
+
+    // $colors map found in /variables/_colors
+    @each $name, $color in $colors{
+        &--#{$name}{
+            &:hover,
+            &:visited,
+            &:active,
+            &:focus{
+                color: $color
+            }
+        }
+    }
+
+    &--header{
+        display: none;
+        font-size: 17px;
+        @include breakpoint_up($small){
+            display: inline-flex;
+        }
+        span{
+            display: none;
+            @include breakpoint_up($phab){
+                display: inline-flex;
+            }
+        }
+    }
+}
+
+
+// * {
+//     background: #000 !important;
+//     color: #0f0 !important;
+//     outline: solid #f00 1px !important;
+//   }

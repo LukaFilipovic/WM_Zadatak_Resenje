@@ -1,0 +1,139 @@
+.block-holder{
+    align-items: stretch;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    padding-right: 9px;
+
+    &__block{
+        align-items: stretch;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0px -0px 20px -0px;
+        @include  breakpoint_up($small){
+            margin: 0px -20px 20px -20px;
+        }
+        &:last-child{
+            margin-bottom: 0px;
+        }
+    }
+    &__inner{
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 8px;
+        position: relative;
+        @include  breakpoint_up($small){
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding: 0px 20px;
+        }
+    }
+    &__image{
+        background-color: #e9e9e9;
+        position: relative;
+        @include background(169,102);
+        @include breakpoint_up($small){
+            @include background(189,113);
+        }
+    }
+    &__icon{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        &--calc{
+            @include set_icon('section','calc');
+            width: 36px;
+            height: 41px;
+            @include breakpoint_up($small){
+                width: 40px;
+                height: 45px;
+            }
+        }
+        &--hat{
+            @include set_icon('section','hat');
+            width: 54px;
+            height: 42px;
+            @include breakpoint_up($small){
+                width: 60px;
+                height: 46px;
+            }
+        }
+        &--cloud{
+            @include set_icon('section','cloud');
+            width: 51px;
+            height: 35px;
+            @include breakpoint_up($small){
+                width: 57px;
+                height: 39px;
+            }
+        }
+        &--clock{
+            @include set_icon('section','clock');
+            width: 40px;
+            height: 40px;
+            @include breakpoint_up($small){
+                width: 45px;
+                height: 45px;
+            }
+        }
+        &--thumbs-up{
+            @include set_icon('section','thumbs-up');
+            width: 41px;
+            height: 42px;
+            @include breakpoint_up($small){
+                width: 46px;
+                height: 47px;
+            }
+        }
+        &--heart{
+            @include set_icon('section','heart');
+            width: 44px;
+            height: 41px;
+            @include breakpoint_up($small){
+                width: 50px;
+                height: 45px;
+            }
+        }
+    }
+    &__block-title{
+        color: $secondary-color;
+        font-size: 15px;
+        font-weight: 400;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        @include breakpoint_up($small){
+            margin-top: 0;
+        }
+    }
+    &__block-text{
+        color: $secondary-color;
+        display: none;
+        font-size: 13px;
+        margin: 0;
+        @include breakpoint_up($small){
+            display: block;
+        }
+    }
+    &__block-link{
+        background-color: #f3f3f4;
+        border-radius: 6px;
+        color: $secondary-color;
+        display: inline-flex;
+        align-content: flex-end;
+        font-size: 11px;
+        float: right;
+        text-align: right;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 9px 6px 7px;
+        transition: all 0.25s ease-out;
+        &:hover,
+        &:active,
+        &:focus,
+        &:visited{
+            color: $white;
+            background-color: $active-color;
+        }
+    }
+}

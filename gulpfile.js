@@ -15,29 +15,48 @@ let svgo = require('gulp-svgo');
 
 
 function buildSass(cb) {
-  return src("static/src/scss/app.scss")
+  return src("./src/scss/app.scss")
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(rename({ extname: ".min.css" }))
-    .pipe(dest("static/dist/css/"))
+    .pipe(dest("./dist/css/"))
     .pipe(clean({ compatibility: "ie8" }))
     .pipe(sourcemaps.write("/"))
-    .pipe(dest("static/dist/css/"));
+    .pipe(dest("./dist/css/"));
   cb();
 }
+// function buildVendorSass(cb) {
+//   return src("static/plugins/css/*.css")
+//     .pipe(sourcemaps.init())
+//     .pipe(concatCss("vendor.css"))
+//     .pipe(rename({ extname: ".min.css" }))
+//     .pipe(dest("static/dist/css/"))
+//     .pipe(clean({ compatibility: "ie8" }))
+//     .pipe(sourcemaps.write("/"))
+//     .pipe(dest("static/dist/css/"));
+//   cb();
+// }
 function buildVendorSass(cb) {
-  return src("static/plugins/css/*.css")
+  return src(
+    [
+      "node_modules/slick-carousel/slick/slick.css",
+      "node_modules/slick-carousel/slick/slick-theme.css",
+    ],
+    {
+      base: "node_modules/"
+    }
+  )
     .pipe(sourcemaps.init())
     .pipe(concatCss("vendor.css"))
     .pipe(rename({ extname: ".min.css" }))
-    .pipe(dest("static/dist/css/"))
+    .pipe(dest("./dist/css/"))
     .pipe(clean({ compatibility: "ie8" }))
     .pipe(sourcemaps.write("/"))
-    .pipe(dest("static/dist/css/"));
+    .pipe(dest("./dist/css/"));
   cb();
 }
 function buildScripts(cb) {
-  return src("static/src/js/app.js")
+  return src("./src/js/app.js")
     .pipe(sourcemaps.init())
     .pipe(
       babel({
@@ -46,68 +65,75 @@ function buildScripts(cb) {
     )
     .pipe(concat("app.bundle.js"))
     .pipe(terser())
-    .pipe(dest("static/dist/js/"))
+    .pipe(dest("./dist/js/"))
     .pipe(sourcemaps.write("/"))
-    .pipe(dest("static/dist/js/"));
+    .pipe(dest("./dist/js/"));
   cb();
 }
 function buildVendorScripts(done) {
   return src(
     [
       "node_modules/jquery/dist/jquery.js",
-      "node_modules/jquery-validation/dist/jquery.validate.js",
-      "node_modules/gumshoejs/dist/gumshoe.polyfills.js",
-      "node_modules/gsap/src/uncompressed/TweenMax.js",
-      "node_modules/smooth-scroll/dist/smooth-scroll.polyfills.js",
       "node_modules/slick-carousel/slick/slick.js",
+      "node_modules/smooth-scroll/dist/smooth-scroll.polyfills.js",
+      "node_modules/gsap/src/uncompressed/TweenMax.js",
+      "node_modules/gsap/src/uncompressed/TweenMax.js",
+      "node_modules/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js",
+      "node_modules/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js",
+      "node_modules/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js",
+      // "node_modules/gumshoejs/dist/gumshoe.polyfills.js",
     ],
     {
       base: "node_modules/"
     }
   )
-    .pipe(concat("vendor.bundle.js"))
+    .pipe(concat("./dist/js/vendor.bundle.js"))
     .pipe(terser())
-    .pipe(dest("static/dist/"));
+    .pipe(dest("./"));
   done();
 }
-function themeScripts(done) {
-  return src(
-    [
-      "static/plugins/js/bootstrap.min.js",
-      "static/plugins/js/ct-paper.js",
-      // "static/plugins/js/smartbanner.js/dist/smartbanner.js",
-    ],
-    {
-      base: 'static/'
-    }
-  )
-    .pipe(concat("theme.bundle.js"))
-    .pipe(terser())
-    .pipe(dest("static/dist/"));
-  done();
-}
+// function themeScripts(done) {
+//   return src(
+//     [
+//       "static/plugins/js/bootstrap.min.js",
+//       "static/plugins/js/ct-paper.js",
+//       // "static/plugins/js/smartbanner.js/dist/smartbanner.js",
+//     ],
+//     {
+//       base: 'static/'
+//     }
+//   )
+//     .pipe(concat("theme.bundle.js"))
+//     .pipe(terser())
+//     .pipe(dest("static/dist/"));
+//   done();
+// }
 
 // img compression tasks
 
 function smush(done) {
-  return src('static/src/images/*.{jpg,png}')
-    .pipe(smushit())
-    .pipe(dest('static/dist/images'));
+  return src('./src/images/**/*.{jpg,png}')
+    .pipe(smushit({verbose: true}))
+    .pipe(dest('./dist/images/'));
   done();
 }
 function smushSvg(done) {
-  return src('static/src/images/*')
+  return src('.src/images/*')
     .pipe(svgo())
-    .pipe(dest('static/dist/images'));
+    .pipe(dest('.dist/images'));
   done()
 }
 
 
+// function build(cb) {
+//   watch(
+//     ["./src/scss/**/*.scss", "./src/js/*.js"],
+//     series(buildSass, buildScripts)
+//   );
+//   cb();
+// }
 function build(cb) {
-  watch(
-    ["static/src/scss/**/*.scss", "static/src/js/custom.js"],
-    series(buildSass, buildScripts)
-  );
+  series(smush, buildVendorSass, buildVendorScripts, buildSass, buildScripts);
   cb();
 }
 function buildVendorFiles(cb) {
