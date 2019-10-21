@@ -1,11 +1,14 @@
-.section{
-    padding: 10px 0px; 
-    &__title{
-        color: $secondary-color;
-        font-size: 27px;
-        font-weight: 400;
-        margin-top: 0px;
-        margin-bottom: 12px;
-        text-transform: uppercase;
-    }
+.section {
+	padding: 10px 0px;
+	@include breakpoint_up($xlarge) {
+		padding: 25px 0px;
+	}
+	&__title {
+		color: $secondary-color;
+		font-size: 27px;
+		font-weight: 400;
+		margin-top: 0px;
+		margin-bottom: 12px;
+		text-transform: uppercase;
+	}
 }
